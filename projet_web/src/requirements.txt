@@ -1,0 +1,6 @@
+pymysql
+mysqlclient
+mysql-connector-python
+gunicorn
+Flask
+flask-sqlalchemy
