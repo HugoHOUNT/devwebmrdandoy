@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #45c;
+  color: #45c950;
+}
+body .container {
+  background: wheat;
+  width: 70vw;
+  margin: 2% auto;
+  padding: 20px;
+  border: 1px solid #00003d;
+  border-radius: 20px;
+}
+body .italic {
+  font-style: italic;
+}
+body .hero {
+  color: navy;
+}
+body .hero .italic {
+  font-weight: bold;
+}/*# sourceMappingURL=main.css.map */
