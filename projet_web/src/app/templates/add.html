@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Add page</title>{% endblock %}
+
+{% block content %}
+  <h1>Ajouter une donnée</h1>
+  <form method="post" action="{{ url_for('add') }}">
+    <label for="rna_id">ID du RNA :</label>
+    <input type="text" id="rna_id" name="rna_id"><br><br>
+    
+    <label for="rna_id_ex">ID du RNA Ex :</label>
+    <input type="text" id="rna_id_ex" name="rna_id_ex"><br><br>
+    
+    <label for="gestion">Gestion :</label>
+    <input type="text" id="gestion" name="gestion"><br><br>
+
+    <input type="submit" value="Ajouter">
+  </form>
+{% endblock %}

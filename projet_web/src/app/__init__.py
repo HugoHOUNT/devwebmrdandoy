@@ -35,7 +35,7 @@ def assos():
   #for data in result.scalars():
   #  print(f"{data.rna_id}")
 
-  return render_template('assos.html')
+  return render_template('assos.html',datas=datas)
 
 @app.route('/hello')
 @app.route('/hello/<name>')
@@ -44,3 +44,27 @@ def hello(name=None):
 
 if __name__ == '__main__':
   app.run()
+
+
+@app.route('/add', methods=['GET', 'POST'])
+def add():
+    if request.method == 'POST':
+        rna_id = request.form['rna_id']
+        rna_id_ex = request.form['rna_id_ex']
+        gestion = request.form['gestion']
+
+        new_data = Data(rna_id=rna_id, rna_id_ex=rna_id_ex, gestion=gestion)
+        db.session.add(new_data)
+        db.session.commit()
+
+        return redirect('/assos')
+
+    return render_template('add.html')
+
+@app.route('/edit')
+def edit():
+  return render_template('edit.html')
+
+@app.route('/delete')
+def delete():
+  return render_template('delete.html')

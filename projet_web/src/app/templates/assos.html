@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Page assos</title>{% endblock %}
+
+{% block content %}
+<h1> </h1>
+<h1 class="centered">Assos page</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>RNA ID</th>
+            <th>RNA ID EX</th>
+            <th>Gestion</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in datas %}
+        <tr>
+            <td>{{ data.id }}</td>
+            <td>{{ data.rna_id }}</td>
+            <td>{{ data.rna_id_ex }}</td>
+            <td>{{ data.gestion }}</td>
+            <td><a href="/add"><button>Add</button></a></td>
+            <td><a href="/edit"><button>Edit</button></a></td>
+            <td><a href="/delete"><button>Delete</button></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

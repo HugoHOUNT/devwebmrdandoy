@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
-    {% block title %}<title>titre par defaut</title>{% endblock %}
-    <title>Document</title>
+    
+    {% block title %}<title>Titre par default</title>{% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <nav>
         <ul>
-            <li><a href="/">home</a></li>
-            <li><a href="/about" >about</a></li>
-            <li><a href="/hello">hello</a></li>
+            <li><a href="/">HOME</a></li>
+            <li><a href="/about">ABOUT</a></li>
+            <li><a href="/hello">HELLO</a></li>
+            <li><a href="/assos">ASSOS</a></li>
+            <li><a href="/add">ADD DATA</a></li>
+            <li><a href="/edit">EDIT DATA</a></li>
+            <li><a href="/delete">DELETE DATA</a></li>
         </ul>
     </nav>
     {% block content %}{% endblock %}
