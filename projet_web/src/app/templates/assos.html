@@ -23,8 +23,13 @@
             <td>{{ data.rna_id_ex }}</td>
             <td>{{ data.gestion }}</td>
             <td><a href="/add"><button>Add</button></a></td>
-            <td><a href="/edit"><button>Edit</button></a></td>
-            <td><a href="/delete"><button>Delete</button></a></td>
+            <td><a href="/edit"><button>edit</button></a></td>
+            <td>
+                <form action="{{ url_for('delete', id=data.id) }}" method="POST" 
+                onsubmit="return confirm('Are you sure you want to delete this data?')">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
