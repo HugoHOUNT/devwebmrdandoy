@@ -1,13 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 
 from sqlalchemy import select
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import func
-
-from myapp import db
-from myapp.app import app
-from myapp.models import Data
 
 import os
 import json
@@ -97,12 +94,10 @@ def delete(id):
 
 @app.route('/chart')
 def chart():
-    # Récupération des données
     query = db.session.query(Data.gestion, func.count(Data.gestion)).group_by(Data.gestion).all()
     gestion_labels = [row[0] for row in query]
     gestion_counts = [row[1] for row in query]
-
-    # Rendu du template HTML avec les données
+    
     return render_template('chart.html', gestion_labels=gestion_labels, gestion_counts=gestion_counts)
 
 if __name__ == '__main__':

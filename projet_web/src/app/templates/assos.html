@@ -22,7 +22,6 @@
             <td>{{ data.rna_id }}</td>
             <td>{{ data.rna_id_ex }}</td>
             <td>{{ data.gestion }}</td>
-            <td><a href="/add"><button>Add</button></a></td>
             <td><a href="/edit"><button>edit</button></a></td>
             <td>
                 <form action="{{ url_for('delete', id=data.id) }}" method="POST" 

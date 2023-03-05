@@ -1,36 +1,206 @@
 {% extends 'base.html' %}
 
-{% block title %}<title>Graphique camembert</title>{% endblock %}
-
 {% block content %}
-  <canvas id="chart"></canvas>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var ctx = document.getElementById('chart').getContext('2d');
-      var chart = new Chart(ctx, {
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Graphique interactif en camembert</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <canvas id="myChart" width="200" height="200"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
         type: 'pie',
         data: {
-          labels: {{ labels|safe }},
-          datasets: [{
-            data: {{ data|safe }},
-            backgroundColor: [
-              '#FF6384',
-              '#36A2EB',
-              '#FFCE56',
-              '#8C5AEF',
-              '#FFA267'
-            ]
-          }]
+            labels: {{ gestion_labels|tojson }},
+            datasets: [{
+                data: {{ gestion_counts|tojson }},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)',
+                    'rgba(75, 192, 192, 0.8)',
+                    'rgba(153, 102, 255, 0.8)',
+                    'rgba(255, 159, 64, 0.8)'
+                ],
+                borderWidth: 1
+            }]
         },
         options: {
-          responsive: true,
-          title: {
-            display: true,
-            text: 'Répartition des gestions'
-          }
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                position: 'bottom',
+                labels: {
+                    fontColor: 'black',
+                    fontSize: 14
+                }
+            }
         }
-      });
     });
-  </script>
+</script>
+
+<div class="row">
+  <div class="col-sm-12">
+      <canvas id="myBarChart" width="200" height="200"></canvas>
+  </div>
+</div>
+
+<script>
+  var ctx = document.getElementById('myBarChart').getContext('2d');
+  var myBarChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: {{ gestion_labels|tojson }},
+          datasets: [{
+              label: 'Nombre de gestionnaires',
+              data: {{ gestion_counts|tojson }},
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.8)',
+                  'rgba(54, 162, 235, 0.8)',
+                  'rgba(255, 206, 86, 0.8)',
+                  'rgba(75, 192, 192, 0.8)',
+                  'rgba(153, 102, 255, 0.8)',
+                  'rgba(255, 159, 64, 0.8)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true,
+                      fontColor: 'black',
+                      fontSize: 14
+                  }
+              }],
+              xAxes: [{
+                  ticks: {
+                      fontColor: 'black',
+                      fontSize: 14
+                  }
+              }]
+          },
+          legend: {
+              display: false
+          }
+      }
+  });
+</script>
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-sm-6">
+          <canvas id="pieChart" width="200" height="200"></canvas>
+      </div>
+      <div class="col-sm-6">
+          <canvas id="lineChart" width="200" height="200"></canvas>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-sm-6">
+          <canvas id="barChart" width="200" height="200"></canvas>
+      </div>
+      <div class="col-sm-6">
+          <canvas id="doughnutChart" width="200" height="200"></canvas>
+      </div>
+  </div>
+</div>
+
+<script>
+  // Graphique en ligne
+  var ctxLine = document.getElementById('lineChart').getContext('2d');
+  var lineChart = new Chart(ctxLine, {
+      type: 'line',
+      data: {
+          labels: {{ gestion_labels|tojson }},
+          datasets: [{
+              label: 'Gestion',
+              data: {{ gestion_counts|tojson }},
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1
+          }]
+      },
+      options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          legend: {
+              position: 'bottom',
+              labels: {
+                  fontColor: 'black',
+                  fontSize: 14
+              }
+          },
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
+  });
+</script>
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-sm-6">
+          <h3>Graphique en radar</h3>
+          <canvas id="radarChart" width="200" height="200"></canvas>
+      </div>
+  </div>
+</div>
+
+<script>
+  var ctx = document.getElementById('radarChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+      type: 'radar',
+      data: {
+          labels: {{ gestion_labels|tojson }},
+          datasets: [{
+              label: 'Nombre d\'occurrences',
+              data: {{ gestion_counts|tojson }},
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255,99,132,1)',
+              borderWidth: 1
+          }]
+      },
+      options: {
+          maintainAspectRatio: true,
+          legend: {
+              position: 'bottom',
+              labels: {
+                  fontColor: 'black',
+                  fontSize: 18
+              }
+          },
+          scale: {
+              ticks: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+</script>
+
 {% endblock %}
